@@ -58,7 +58,7 @@ def set_time_slides(time_window, start_time, end_time):
 
 def get_core_community(query, time_window, start_time, end_time):
     print query, time_window, start_time, end_time
-    set_time_slides(time_window, start_time, end_time)
+    set_time_slides(time_window, start_time, end_time+1)
     authors = []
     for q in query:
         authors.extend(data_center.searchAuthors(q).authors)
@@ -78,7 +78,9 @@ def get_documents(authors):
     num_documents = len(documents)
     return documents
 
-def get_terms(documents):
+
+def get_terms():
+    global num_terms
     for d in documents:
         terms = []
         res = mongo_client.find_one({"_id":d.id})
@@ -91,7 +93,7 @@ def get_terms(documents):
             tid = term_id[t]
             terms.append(tid)
         doc_term[d.id] = terms
-        time = get_time_slide(res["year"])
+        time = get_time_slide[res["year"]]
         doc_time[d.id] = time
         num_documents_given_time[time] += 1
 
