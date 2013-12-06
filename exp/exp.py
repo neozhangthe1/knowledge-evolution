@@ -44,7 +44,7 @@ mutual_info_given_time = {}
 time_slides = []
 get_time_slide = {}
 
-G = nx.Graph()
+G = nx.DiGraph()
 
 
 def set_time_slides(self, year):
@@ -132,6 +132,10 @@ def calculate_co_occur():
         pairs.append(pair)
         pair_id[pair] = num_pairs
         num_pairs += 1
+    for i in range(num_terms):
+        pairs.append((i,i))
+        pair_id[(i,i)] = num_pairs
+        num_pairs += 1
 
 def mutual_infomation(u, v, t):
     mi = 0.0
@@ -170,10 +174,17 @@ def build_network():
     #assign influence probability
     for t in range(len(time_slides)):
         for p_i, i in enumerate(pairs):
-            G.add_edge(str(p_i[0])+"*"+str(t), str(p_i[1])+"*"+str(t), influence=mutual_info_given_time[t][i])
+            mi_0_1 = mutual_info_given_time[t][i]
+            mi_0_0 = mutual_info_given_time[t][pair_id[(p_i[0], p_i[0])]]
+            mi_1_1 = mutual_info_given_time[t][pair_id[(p_i[1], p_i[1])]]
+            inf_0_1 = mi_0_1/mi_0_0
+            inf_1_0 = mi_0_1/mi_1_1
+            G.add_edge(str(p_i[0])+"*"+str(t), str(p_i[1])+"*"+str(t), influence=inf_0_1)
+            G.add_edge(str(p_i[1])+"*"+str(t), str(p_i[0])+"*"+str(t), influence=inf_1_0)
         if t > 0:
             for term, i in enumerate(corpus):
                 G.add_edge(str(i)+"*"+str(t), str(i)+"*"+str(t-1), influence=1)
+                G.add_edge(str(i)+"*"+str(t-1), str(i)+"*"+str(t), influence=1)
     #assign activate threshold
 
 
