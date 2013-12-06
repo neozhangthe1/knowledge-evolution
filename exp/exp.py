@@ -25,6 +25,7 @@ start_time = 0
 end_time = 10000
 time_window = 1
 num_documents = 0
+num_documents_given_time = []
 
 num_terms = 0
 corpus = []
@@ -43,6 +44,7 @@ mutual_info_given_time = {}
 time_slides = []
 get_time_slide = {}
 
+G = nx.Graph()
 
 
 def set_time_slides(self, year):
@@ -56,7 +58,7 @@ def set_time_slides(self, year):
     for ts, i in enumerate(time_slides):
         for y in ts:
             get_time_slide[y] = i
-
+    num_documents_given_time = [0 for i in range(len(time_slides))]
 
 
 def get_core_community(query, time_window, start_time, end_time):
@@ -93,7 +95,9 @@ def get_terms(documents):
             tid = term_id[t]
             terms.append(tid)
         doc_term[d.id] = terms
-        doc_time[d.id] = get_time_slide(res["year"])
+        time = get_time_slide(res["year"])
+        doc_time[d.id] = time
+        num_documents_given_time[time] += 1
 
 def calculate_co_occur():
     term_freq = [0 for i in range(num_terms)]
@@ -134,7 +138,7 @@ def mutual_infomation(u, v, t):
     pair = (u, v)
     if pair[0] > pair[1]:
         pair = (pair[1], pair[0])
-    D = float(num_documents)
+    D = float(num_documents_given_time[t])
     df_u = term_freq[u]
     df_v = term_freq[v]
     df_u_v = co_occur_given_time[t][pair]
@@ -155,19 +159,28 @@ def calculate_mutual_info():
         for p_i, i in enumerate(pairs):
             mutual_info_given_time[t][i] = mutual_infomation(p_i[0], p_i[1], t)
 
-
-
-def build_network():
-    pass
-
 def calculate_burstiness():
     pass
 
 def chi_square(a,b,c,d):
     pass
 
-def influence_maximization():
-    pass
+
+def build_network():
+    #assign influence probability
+    for t in range(len(time_slides)):
+        for p_i, i in enumerate(pairs):
+            G.add_edge(str(p_i[0])+"*"+str(t), str(p_i[1])+"*"+str(t), influence=mutual_info_given_time[t][i])
+        if t > 0:
+            for term, i in enumerate(corpus):
+                G.add_edge(str(i)+"*"+str(t), str(i)+"*"+str(t-1), influence=1)
+    #assign activate threshold
+
+
+def influence_maximization(G, num_seed, step):
+    from linear_threshold import linear_threshold
+    linear_threshold(G, num_seed, step)
+
 
 def trend_partitioning():
     pass
