@@ -159,11 +159,37 @@ def calculate_mutual_info():
         for i, p_i in enumerate(pairs):
             mutual_info_given_time[t][i] = mutual_infomation(p_i[0], p_i[1], t)
 
+
 def calculate_burstiness():
-    pass
+    init_threshold = 0.5
+    beta = 0.8
+    burstiness = []
+    burstiness.append([init_threshold for i in range(num_terms) ])
+    accu_term_frequency = np.zeros(num_terms)
+    accu_num_docs = 0
+    for ts in range(1,len(time_slides)+1):
+        prev_ts = ts - 1
+        accu_term_frequency += term_freq_given_time[prev_ts,:]
+        accu_num_docs += num_documents_given_time[prev_ts]
+        burstiness_ts = [0 for i in range(num_terms)]
+        for term in range(num_terms):
+            #_ts_term
+            a = term_freq_given_time[ts, term]
+            #_ts_nterm
+            b = num_documents_given_time[ts] - a
+            #_nts_term
+            c = accu_term_frequency[term]
+            #_nts_nterm
+            d = accu_num_docs - c
+
+            chi2 = chi_square(a,b,c,d)
+            burstiness_ts[i] = burstiness[prev_ts][term] * beta + (1-beta) * math.exp(-chi2)
+        burstiness.append(burstiness_ts)
+    return burstiness
 
 def chi_square(a,b,c,d):
-    pass
+    n = a+b+c+d
+    return (a*d-b*c)**2 * n * 1.0 / ((a+b)*(c+d)*(a+c)*(b+d))
 
 
 def build_network():
