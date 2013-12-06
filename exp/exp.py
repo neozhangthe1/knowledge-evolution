@@ -44,6 +44,17 @@ get_time_slide = {}
 
 G = nx.DiGraph()
 
+def set_time_slides(time_window, start_time, end_time):
+    cur = start_time
+    while cur < end_time:
+        cur_ts = []
+        for i in range(time_window):
+            cur_ts.append(cur)
+            cur += 1
+        time_slides.append(cur_ts)
+    for i, ts in enumerate(time_slides):
+        for y in ts:
+            get_time_slide[y] = i
 
 def get_core_community(query, time_window, start_time, end_time):
     print query, time_window, start_time, end_time
