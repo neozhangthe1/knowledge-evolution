@@ -10,7 +10,6 @@ import logging
 import pymongo
 from sklearn.cluster import Ward, KMeans, MiniBatchKMeans, spectral_clustering
 
-
 data_center = DataCenterClient("tcp://10.1.1.111:32012")
 mongo_client = pymongo.Connection("10.1.1.111",12345)["aminer"]["publications"]
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -44,19 +43,6 @@ time_slides = []
 get_time_slide = {}
 
 G = nx.DiGraph()
-
-def set_time_slides(time_window, start_time, end_time):
-    cur = start_time
-    while cur < end_time:
-        cur_ts = []
-        for i in range(time_window):
-            cur_ts.append(cur)
-            cur += 1
-        time_slides.append(cur_ts)
-    for ts, i in enumerate(time_slides):
-        for y in ts:
-            get_time_slide[y] = i
-    num_documents_given_time = [0 for i in range(len(time_slides))]
 
 
 def get_core_community(query, time_window, start_time, end_time):
@@ -159,7 +145,7 @@ def calculate_mutual_info():
     mutual_info = [0.0 for i in range(num_pairs)]
     mutual_info_given_time = [[0.0 for i in range(num_pairs)] for t in range(len(time_slides))]
     for t in range(len(time_slides)):
-        for p_i, i in enumerate(pairs):
+        for i, p_i in enumerate(pairs):
             mutual_info_given_time[t][i] = mutual_infomation(p_i[0], p_i[1], t)
 
 def calculate_burstiness():
@@ -172,7 +158,7 @@ def chi_square(a,b,c,d):
 def build_network():
     #assign influence probability
     for t in range(len(time_slides)):
-        for p_i, i in enumerate(pairs):
+        for i, p_i in enumerate(pairs):
             mi_0_1 = mutual_info_given_time[t][i]
             mi_0_0 = mutual_info_given_time[t][pair_id[(p_i[0], p_i[0])]]
             mi_1_1 = mutual_info_given_time[t][pair_id[(p_i[1], p_i[1])]]
