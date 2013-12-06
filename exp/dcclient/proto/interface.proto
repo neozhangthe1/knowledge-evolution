@@ -1,0 +1,249 @@
+package mashaler;
+
+option java_outer_classname = "Mashaler";
+option java_package = "org.iminer.services.datacenter";
+
+message Publication {
+	optional int32 id = 1;
+	optional string key = 2;
+	optional string title = 3;
+	optional int32 conf_id = 4;
+	optional string jconf_name = 5;
+	optional string jconf_alias = 6;
+	optional int32 year = 7;
+	optional int32 start_page = 8;
+	optional int32 end_page = 9;
+	optional int32 type_id = 10;
+	optional int32 publisher_id = 11;
+	optional string abs = 12;
+	optional int32 n_citations = 13;
+	//optional string author_ids = 14;//split by ','
+	repeated int32 author_ids = 14;
+	optional string authors = 15;// split by ','
+	optional int32 topic = 16;
+	optional string dblpeelink = 17;
+	optional string dblplink = 18;
+	repeated int32 cite_pubs = 19;
+	repeated int32 cited_by_pubs = 20;
+	repeated int32 org_ids = 21;
+}
+
+message PublicationResult {
+	repeated Publication publications = 1;
+	optional int32 total_count = 2 [default = 0];
+}
+
+message IntArray {
+	repeated int32 values = 1;
+}
+
+message DoubleArray {
+	repeated double values = 1;
+}
+
+message AuthorFeature {
+	optional IntArray topics = 1;
+	repeated IntArray ranks = 2;
+	repeated DoubleArray scores = 3;
+	optional int32 most_cited_paper = 4 [default = 0];
+}
+
+message Author {
+	optional int32 naid = 1;
+	repeated string names = 2;
+	optional int32 type = 28;
+	optional int32 contact_id = 3;
+	optional string email = 4;
+	optional string address = 5;
+	optional string phone = 6;
+	optional string fax = 7;
+	optional string homepage = 8;
+	optional string position = 9;
+	optional string affiliation = 10;
+	optional string imgurl = 11;
+	optional string phduniv = 12;
+	optional string phdmajor = 13;
+	optional string phddate = 14;
+	optional string msuniv = 15;
+	optional string msmajor = 16;
+	optional string msdate = 17;
+	optional string bsuniv = 18;
+	optional string bsmajor = 19;
+	optional string bsdate = 20;
+	optional string bio = 21;
+	optional string interest = 22;
+	
+	repeated int32 interest_years = 23;
+	repeated string interest_by_year = 24;
+	optional AuthorFeature feature = 25;
+	
+	optional string imgsrc = 26;
+	optional string imgname = 27;
+	
+	optional int32 h_index = 29;
+	optional int32 citation_no = 30;
+	optional int32 pub_count = 31;
+	
+	optional int32 org_id = 32;
+}
+
+message AuthorResult {
+	repeated Author authors = 1;
+	optional int32 total_count = 2 [default = 0];
+	//repeated string topics = 3;
+	//repeated int32 topic_frequency = 4;
+}
+
+message JournalConference {
+	optional int32 id = 1;
+	required string name = 2;
+	optional int32 index = 3;
+	optional double percent = 4;
+	optional string alias = 5;
+	optional double score = 6;
+}
+
+message ConferenceResult {
+	repeated JournalConference confs = 1;
+	optional int32 total_count = 2 [default = 0];
+}
+
+message StringQueryParams {
+	optional string query = 1;
+	optional int32 offset = 2 [default = 0];
+	optional int32 count = 3 [default = 0];
+	repeated string searched_fields = 4;
+	repeated string returned_fields = 5;
+	repeated Condition conditions = 6;
+	optional string sort_type = 7;
+}
+
+message IntQueryParams {
+	repeated int32 ids = 1;
+	optional int32 offset = 2;
+	optional int32 count = 3;
+	repeated string searched_fields = 4;
+	repeated string returned_fields = 5;
+	repeated Condition conditions = 6;
+	optional string sort_type = 7;
+}
+
+message Condition {
+	optional string field = 1;
+	optional string op = 2; //< , > , = , >= , <=
+	optional string value = 3;
+}
+
+message PubScorePair {
+	optional Publication publication = 1;
+	optional double score = 2 [default = 0.0];
+}
+
+message PublicationScoredResult {
+	repeated PubScorePair pub_score_pairs = 1;
+	optional int32 total_count = 2 [default = 0];
+}
+
+message ConfScorePair {
+	optional JournalConference conf = 1;
+	optional double score = 2 [default = 0.0];
+}
+
+message ConferenceScoredResult {
+	repeated ConfScorePair conf_score_pairs = 1;
+	optional int32 total_count = 2 [default = 0];
+}
+
+message AuthorScorePair {
+	optional Author author = 1;
+	optional double score = 2 [default = 0.0];
+}
+
+message AuthorScoredResult {
+	repeated AuthorScorePair author_score_pairs = 1;
+	optional int32 total_count = 2 [default = 0];
+}
+
+message IntDoublePair {
+	optional int32 key = 1 [default = 0];
+	optional double value =2 [default = 0.0];
+}
+
+message IntDoublePairs {
+	repeated IntDoublePair items = 1;
+} 
+
+message StringDoublePair {
+	optional string key = 1;
+	optional double value =2 [default = 0.0];
+}
+
+message StringDoublePairs {
+	repeated StringDoublePair items = 1;
+}
+
+//message ACTParam {
+	//optional int32 int_param = 1 [default = 0];
+	//optional string string_param = 2;
+	//repeated string returned_fields = 3;
+//}
+
+message Distribution {
+	repeated double values = 1;
+}
+
+message MergeAuthorParam {
+	repeated int32 naids = 1;
+	optional string names = 2;
+	optional int32 contact_id = 3;
+	optional int32 type = 4;
+}
+
+message AuthorRelation {
+	optional int32 pid1 = 1;
+	optional int32 pid2 = 2;
+	optional double similarity = 3;
+	optional string rel_type = 4;
+}
+
+message AuthorRelations {
+	repeated AuthorRelation relations = 1;
+}
+
+message RelationSearchParam {
+	repeated int32 person_ids = 1;
+	repeated int32 expand_ids = 2;
+	repeated int32 remove_ids = 3;
+	optional int32 algo = 4;
+}
+
+message MovePubParam {
+	optional int32 from = 1;
+	optional int32 to = 2;
+	optional int32 pub_id = 3;
+}
+
+message Organization {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional double lat = 3;
+	optional double lng = 4;
+	optional string logo = 5;
+	optional string address = 6;
+	optional string wiki_name = 7;
+	optional string wiki_url = 8;
+	optional string motto = 9;
+	optional string establish_year = 10;
+	optional string website  = 11;
+	repeated int32 pub_ids = 12;
+}
+
+message OrganizationResult {
+	repeated Organization organizations = 1;
+}
+
+message TrendData {
+	repeated int32 start_years = 1;
+	repeated int32 topic_ids = 2;
+	repeated Distribution trends = 3;
+}
