@@ -18,9 +18,10 @@ public class InfluenceMaximization {
             BufferedReader br = new BufferedReader(new FileReader(fname));
             HashMap<Integer, String> map = new HashMap<Integer, String>();
             String line;
+            int id = 0;
             while((line = br.readLine())!=null){
                 String[] part = line.split("\t");
-                map.put(Integer.parseInt(part[1]), part[0]);
+                map.put(id++, part[0]);
             }
             br.close();
             return map;
@@ -30,16 +31,18 @@ public class InfluenceMaximization {
         }
     }
     public static void main(String argv[]){
+        String graphInput = argv[0];
+        String keywordInput = argv[1];
         Graph graph = new Graph();
-        if(!graph.loadFile(argv[1])){
+        if(!graph.loadFile(graphInput)){
             System.out.println("Fail to load file");
         }
         int K = 100;
-        double theta = 0.1;
+        double theta = 0.01;
         Set<Integer> seedSet = graph.influenceMaxization(K, theta);
 
         try{
-            HashMap map = loadKeywords(argv[2]);
+            HashMap map = loadKeywords(keywordInput);
             if(map==null){
                 Log.print("Fail to load keywords");
                 return;

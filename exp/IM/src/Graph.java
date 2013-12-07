@@ -45,9 +45,9 @@ public class Graph {
                 graph[i] = new Edge[neighbor_count];
                 pp[i] = new HashMap<Integer, Double>();
                 for(int j=0;j<neighbor_count;++j){
-                    int neighbor = Integer.parseInt(line[j*2]);
+                    int neighbor = Integer.parseInt(line[j*2+1]);
                     inDeg[neighbor]++;
-                    double active_prob = Double.parseDouble(line[j*2+1]);
+                    double active_prob = Double.parseDouble(line[j*2+2]);
                     graph[i][j] = new Edge(neighbor, active_prob);
                     pp[i].put(neighbor, active_prob);
                 }
@@ -100,11 +100,12 @@ public class Graph {
                 break;
             }
             TreeEdge selNode = new TreeEdge(selection, next[selection], Math.exp(-minDist));
-            if(selection != dst){
+            //if(selection != dst){
                 miia.add(selNode);
-            }
+            //}
             for(Edge edge : revGraph[selection]){
                 if(dist[edge.node] > dist[selection] + edge.negLogProb){
+                    dist[edge.node] = dist[selection] + edge.negLogProb;
                     next[edge.node] = selNode;
                 }
             }
