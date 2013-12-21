@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap-responsive.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/css/trend.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/frame.css">
+	<script type="text/javascript" src="/static/lib/d3/d3.v3.min.js"></script>
+	<script type="text/javascript" src="/static/lib/jquery/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="/">SAE</a>
+            <ul class="nav">
+
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+		<div id="chart" class="pull-left">
+			<script src="/static/js/d3.layout.cloud.js"></script>
+			<script src="/static/js/sankey.js"></script>
+			<script src="/static/js/trend.js"></script>
+			<div class="modal-loading"></div>
+		</div>
+		<div id="bottom-box" >
+		</div>
+		<div id="right-box" style="overflow:auto; width:300px;">
+			<ul class="nav nav-tabs" id="nav" style="display:none">
+		  	<li class="active" ><a href="#" id="first-three">Current Hotspot</a></li>
+		  	<li><a href="#" id="revert">Overall</a></li>
+			</ul>
+		</div>
+    </div>
+
+
+</body>
+</html>
+
