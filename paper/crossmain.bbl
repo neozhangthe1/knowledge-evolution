@@ -1,0 +1,179 @@
+\begin{thebibliography}{10}
+
+\bibitem{Backstrom:11}
+L.~Backstrom and J.~Leskovec.
+\newblock Supervised random walks: predicting and recommending links in social
+  networks.
+\newblock In {\em WSDM'11}, pages 635--644, 2011.
+
+\bibitem{BaezaYates:99}
+R.~Baeza-Yates and B.~Ribeiro-Neto.
+\newblock {\em Modern Information Retrieval}.
+\newblock ACM Press, 1999.
+
+\bibitem{Balog:06}
+K.~Balog, L.~Azzopardi, and M.~de~Rijke.
+\newblock Formal models for expert finding in enterprise corpora.
+\newblock In {\em SIGIR'2006}, pages 43--55, 2006.
+
+\bibitem{Crandall:10PNAS}
+D.~J. {Crandall}, L.~{Backstrom}, D.~{Cosley}, S.~{Suri}, D.~{Huttenlocher},
+  and J.~{Kleinberg}.
+\newblock {Inferring social ties from geographic coincidences}.
+\newblock {\em PNAS}, 107:22436--22441, Dec. 2010.
+
+\bibitem{Das:07WWW}
+A.~Das, M.~Datar, A.~Garg, and S.~Rajaram.
+\newblock {G}oogle news personalization: Scalable online collaborative
+  filtering.
+\newblock In {\em WWW'07}, 2007.
+
+\bibitem{Kleinberg:10BOOK}
+D.~Easley and J.~Kleinberg.
+\newblock {\em Networks, Crowds, and Markets: Reasoning about a Highly
+  Connected World}.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{Gilbert:2009}
+E.~Gilbert and K.~Karahalios.
+\newblock Predicting tie strength with social media.
+\newblock In {\em CHI'09}, pages 211--220, 2009.
+
+\bibitem{Hammersley:71}
+J.~M. Hammersley and P.~Clifford.
+\newblock Markov field on finite graphs and lattices.
+\newblock {\em Unpublished manuscript}, 1971.
+
+\bibitem{Heymann:06}
+P.~Heymann and H.~Garcia-Molina.
+\newblock Collaborative creation of communal hierarchical taxonomies in social
+  tagging systems.
+\newblock Technical Report 2006-10, Stanford University, April 2006.
+
+\bibitem{Hopcroft:11CIKM}
+J.~E. Hopcroft, T.~Lou, and J.~Tang.
+\newblock Who will follow you back? reciprocal relationship prediction.
+\newblock In {\em CIKM'11}, 2011.
+
+\bibitem{JinHan:04ICDM}
+X.~Jin, S.~Spangler, Y.~Chen, K.~Cai, R.~Ma, L.~Zhang, X.~Wu, and J.~Han.
+\newblock Patent maintenance recommendation with patent information network
+  model.
+\newblock In {\em ICDM'11}, pages 280--289, 2011.
+
+\bibitem{Joachims:99}
+T.~Joachims.
+\newblock {\em Making large-Scale SVM Learning Practical}.
+\newblock MIT-Press, 1999.
+
+\bibitem{Kautz:97}
+H.~Kautz, B.~Selman, and M.~Shah.
+\newblock Referral web: Combining social networks and collaborative filtering.
+\newblock {\em Communications of the ACM}, 40(3):63--65, 1997.
+
+\bibitem{Kschischang:01}
+F.~R. Kschischang, B.~J. Frey, and H.~andrea Loeliger.
+\newblock Factor graphs and the sum-product algorithm.
+\newblock {\em IEEE TOIT}, 47:498--519, 2001.
+
+\bibitem{Lappas:09KDD}
+T.~Lappas, K.~Liu, and E.~Terzi.
+\newblock Finding a team of experts in social networks.
+\newblock In {\em KDD'09}, pages 467--476, 2009.
+
+\bibitem{Leskovec:10WWW}
+J.~Leskovec, D.~Huttenlocher, and J.~Kleinberg.
+\newblock Predicting positive and negative links in online social networks.
+\newblock In {\em WWW'10}, pages 641--650, 2010.
+
+\bibitem{Liben-Nowell:07}
+D.~Liben-Nowell and J.~M. Kleinberg.
+\newblock The link-prediction problem for social networks.
+\newblock {\em JASIST}, 58(7):1019--1031, 2007.
+
+\bibitem{Liu:11KDD}
+Y.~Liu, P.-y. Hseuh, R.~Lawrence, S.~Meliksetian, C.~Perlich, and A.~Veen.
+\newblock Latent graphical models for quantifying and predicting patent
+  quality.
+\newblock In {\em KDD'11}, pages 1145--1153, 2011.
+
+\bibitem{Mann:08}
+R.~Mann.
+\newblock A new look at patent quality.
+\newblock {\em American Law and Economics Association Annual Meetings}, 2008.
+
+\bibitem{McPherson:01}
+M.~McPherson, L.~Smith-Lovin, and J.~Cook.
+\newblock Birds of a feather: Homophily in social networks.
+\newblock {\em Annual review of sociology}, pages 415--444, 2001.
+
+\bibitem{Mimno:07KDD}
+D.~Mimno and A.~McCallum.
+\newblock Expertise modeling for matching papers with reviewers.
+\newblock In {\em KDD'07}, pages 500--509, 2007.
+
+\bibitem{Roth:10KDD}
+M.~Roth, A.~Ben-David, D.~Deutscher, G.~Flysher, I.~Horn, A.~Leichtberg,
+  N.~Leiser, Y.~Matias, and R.~Merom.
+\newblock Suggesting friends using the implicit social graph.
+\newblock In {\em KDD'10}, pages 233--242, 2010.
+
+\bibitem{Sculley:10}
+D.~Sculley.
+\newblock Combined regression and ranking.
+\newblock In {\em KDD'10}, pages 979--988, 2010.
+
+\bibitem{Shi:11SIGIR}
+Y.~Shi, D.~Ye, A.~Goder, and S.~Narayanan.
+\newblock A large scale machine learning system for recommending heterogeneous
+  content in social networks.
+\newblock In {\em SIGIR'11}, pages 1337--1338, 2011.
+
+\bibitem{Tang:12WSDM}
+J.~Tang, T.~Lou, and J.~Kleinberg.
+\newblock Inferring social ties across heterogenous networks.
+\newblock In {\em WSDM'12}, 2012.
+
+\bibitem{Tang:12KDDPMiner}
+J.~Tang, B.~Wang, Y.~Yang, P.~Hu, Y.~Zhao, X.~Yan, B.~Gao, M.~Huang, P.~Xu,
+  W.~Li, and A.~K. Usadi.
+\newblock Patentminer: topic-driven patent analysis and mining.
+\newblock In {\em KDD '12}, 2012.
+
+\bibitem{Tang:12KDDCross}
+J.~Tang, S.~Wu, J.~Sun, and H.~Su.
+\newblock Cross-domain collaboration recommendation.
+\newblock In {\em KDD'12}, 2012.
+
+\bibitem{Tang:11ML}
+J.~Tang, J.~Zhang, R.~Jin, Z.~Yang, K.~Cai, L.~Zhang, and Z.~Su.
+\newblock Topic level expertise search over heterogeneous networks.
+\newblock {\em Machine Learning Journal}, 82(2):211--237, 2011.
+
+\bibitem{Tang:11Neuro}
+W.~Tang, J.~Tang, T.~Lei, C.~Tan, B.~Gao, and T.~Li.
+\newblock On optimization of expertise matching with various constraints.
+\newblock {\em Neurocomputing}, 76(1):71--83, 2012.
+
+\bibitem{Tseng:07IPM}
+Y.-H. Tseng, C.-J. Lin, and Y.-I. Lin.
+\newblock Text mining techniques for patent analysis.
+\newblock {\em Inf. Process. Manage.}, 43:1216--1247, September 2007.
+
+\bibitem{Yedidia:01}
+J.~S. Yedidia, W.~T. Freeman, and Y.~Weiss.
+\newblock Generalized belief propagation.
+\newblock In {\em NIPS'01}, pages 689--695, 2001.
+
+\bibitem{Yuan:11}
+Q.~Yuan, L.~Chen, and S.~Zhao.
+\newblock Factorization vs. regularization: fusing heterogeneous social
+  relationships in top-n recommendation.
+\newblock In {\em RecSys'11}, pages 245--252, 2011.
+
+\bibitem{Zhang:07DASFAA}
+J.~Zhang, J.~Tang, and J.~Li.
+\newblock Expert finding in a social network.
+\newblock In {\em DASFAA'07}, pages 1066--1069, 2007.
+
+\end{thebibliography}

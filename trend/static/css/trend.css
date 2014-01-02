@@ -9,7 +9,7 @@ svg {
   z-index: 100;
 }
 .container{
-
+  overflow: scroll;
   width: 95%;
 }
 #chart {
@@ -23,6 +23,10 @@ svg {
   clear: both;
   overflow-x: scroll; 
   margin-top: 30px;
+}
+
+#vis {
+  margin-top:70px;
 }
 
 .node rect {

@@ -16,16 +16,18 @@ import re
 from sklearn.cluster import Ward, KMeans, MiniBatchKMeans, spectral_clustering
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-
+     
 class TrendVis(object):
     def __init__(self):
+        # self.client = DataCenterClient("tcp://166.111.134.53:32012")
+        # self.mongo_client = pymongo.Connection("166.111.134.53",12345)["aminer"]["pub"]
         self.client = DataCenterClient("tcp://10.1.1.111:32012")
         self.mongo_client = pymongo.Connection("10.1.1.111",12345)["aminer"]["pub"]
-        self.stop_words = ["data set", "training data", "experimental result", 
+        self.stop_words = set(["data set", "training data", "experimental result", 
                            "difficult learning problem", "user query", "case study", 
                            "web page", "data source", "proposed algorithm", 
                            "proposed method", "real data", "international conference",
-                           "proposed approach","access control"]
+                           "proposed approach","access control","new approach"])
 
     def init_topic_trend(self):
         print "INIT TOPIC TREND"
@@ -61,8 +63,8 @@ class TrendVis(object):
         self.start_time = None
         self.end_time = None
         #cluster info
-        self.num_local_clusters = 3
-        self.num_global_clusters = 2
+        self.num_local_clusters = 10
+        self.num_global_clusters = 5
         self.local_clusters = None
         self.local_cluster_labels = None
         self.global_clusters = None
@@ -175,7 +177,7 @@ class TrendVis(object):
                 else:
                     for t in res["wiki"]:
                         # at least bigram
-                        if " " in t:
+                        if " " in t and t not in self.stop_words:
                             #reg = r"(^.*\s?is$)|(is\s.*?$)"
                             reg = r"|".join(["(^.*\s%s$)|(^%s\s.*$)"%(x,x) for x in ["in","is","are","the","a","been","but","was","be","a","there","this","that","to","of","not","so","we","with","than","for","and","wa","it","almost","an","al"]])
                             #reg = r"((^|\s)is(\s|$))|((^|\s)are(\s|$))|((^|\s)the(\s|$))|((^|\s)a(\s|$))|((^|\s)been(\s|$))|((^|\s)but(\s|$))|((^|\s)was(\s|$))|((^|\s)be(\s|$))|((^|\s)a(\s|$))|((^|\s)there(\s|$))|((^|\s)this(\s|$))|((^|\s)that(\s|$))|((^|\s)to(\s|$))|((^|\s)of(\s|$))|((^|\s)not(\s|$))|((^|\s)so(\s|$))|((^|\s)we(\s|$))|((^|\s)with(\s|$))|((^|\s)a(\s|$))of"
@@ -570,6 +572,9 @@ class TrendVis(object):
             term_index = self.term_index[t]
             term_year = defaultdict(list)
             for d in self.reverse_term_dict[term_index]:
+                if self.document_list[d].year < self.start_time+1:
+                    print d, self.document_list[d].year, self.start_time
+                    continue
                 term_year[self.document_list[d].year].append(d)
             sorted_term_year = sorted(term_year.items(), key=lambda t:t[0])
             if len(sorted_term_year) == 0:
@@ -581,6 +586,8 @@ class TrendVis(object):
                 ty[c] = len(term_year[c])
             start_point = sorted_term_year[0][0]
             start_time = self.get_time_slide(start_point)
+            # print start_point,start_time,term_index,self.start_time
+            # print self.time_slides
             start_cluster = self.global_cluster_labels[start_time][self.local_cluster_labels[start_time][term_index]]
             start_node = global_clusters_index[str(start_time)+"-"+str(start_cluster)]
             item = {"t":t, "idx":int(term_index), 
@@ -622,9 +629,12 @@ class TrendVis(object):
 
 
 def main():
+    import json
     trend = TrendVis()
-    trend.query_terms("deep learning", start_time=0, end_time=10000)
-
+    q = "deep learning"
+    result = trend.query_terms(q, start_time=0, end_time=10000)
+    with open("trend_out_%s.json" % q,"w") as f_out:
+        json.dump(result, f_out)
 
 if __name__ == "__main__":
     main()

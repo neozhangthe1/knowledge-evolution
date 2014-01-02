@@ -1,45 +1,36 @@
-\section{Method}
+\section{Problem Formulation}
 \label{sec:problem}
 
-We choose an optimal summarization of the knowledge evolutionary trend base on \emph{content coverage} and \emph{ burstiness} of words, the method yields intuitive coarse-level summarization of the temporal dynamics of a given research topic.
+In this section, we first present several necessary definitions and then define the tasks of temporal summarization.
 
-The four-step approach are summarize as below:
+\begin{definition}
+\textbf{(Document)}:
+We define a document $d$ as a sequence of $N_d$ terms, denoted as $\mathbf{w}_d$, where each term is chosen from a vocabulary of size $V$.
+\end{definition}
 
-\textbf{Step.1 Expert finding}
-We use a community-based summarization as we first find a core community (a group of experts) related to the topic, and then aggregate each member's research work as the documents to summarize. To avoid some authoritative experts dominate the research area and introduce potential bias, we normalize each member's contribution averagely.
 
-\textbf{Step.2 Knowledge concept extraction}
-With the retrieved document collection, we extract terms mentioned in each document and construct a network $G$, where a term $w_i$ appears in a time slide $t$ is associated with a node $n_i^t$.
-\begin{center}
-\includegraphics[width=0.80\linewidth]{figures/mutual.png}
-\end{center}
-There are two types of edges in the graph:
+\begin{definition}
+\textbf{(Document Cluster)}: A document cluster, denoted as $C_q$, contains a set of documents relevant to the query $q$. The relevance can be considered as either syntax relevance (containing words in the query) or semantic relevance (containing relevant information of the query).
+\end{definition}
 
-\begin{itemize}	
-\item The concepts in the same time slide are connected with mutual info edge. For an arbitrary edge $(n_i^t, n_j^t)$, the weight from $n_i^t$ to $n_j^t$ is $W(n_i^t,n_j^t) = \frac{I(n_i^t,n_j^t)}{I(n_i^t,n_i^t)}$, where $I(n_i^t,n_j^t)$ indicates the mutual information between $w_i$ and $w_j$ within the time slide $t$.
-\item Nodes corresponding to the term $w_i$ within two adjacent time slides $t$ and $t+1$ are connected by an evolving edge $(n_i^t,n_i^{t+1})$, indicates the knowledge concept is evolved from itself in the last time slide. The weight of the evolving edge is a parameter controlling the temporal smoothness of the summarization.
-\end{itemize}
 
-\textbf{Step.3 Knowledge concept selection}
-The following task is to choose a set of terms best summarize the whole research area. We use two measures: \emph{Coverage} and \emph{Burstiness} to choose the terms of interest.
+\begin{definition}
+\textbf{(Representative Term)}: Along the development of science, some concepts may dominate the research area in a specific period of time. For example, the concept deep learning is dominating the field of machine learning right now.
+\end{definition}
 
-\begin{itemize}
-\item We model burstiness by assuming the arrival of words as a unknown binomial distribution, and use $\chi^2$ tests to check for significant association between word and time periods. We calculate the contingency table as below and $\chi^2 = \frac{(ad-bc)^2n}{(a+b)(c+d)(a+c)(b+d)}$.
-\begin{center}
-\begin{tabularx}{0.5\linewidth}{ |X|X|X| }
-  \hline
-  - & $W$ & $\bar{W}$ \\
-  \hline
-  $t$  & a  & b  \\
-  \hline
-  $<t$  & c  & d  \\
-  \hline
-\end{tabularx}
-\end{center}
+\begin{definition}
+\textbf{(Evolutionary Trend)}: An evolutionary trend $\mu$ of a document cluster $C$ is a set of term clusters over time, where terms can be assigned into different clusters at different time slides. Each document cluster is considered as a mixture of multiple topic models. The assumption of this model is that words in the document are sampled following word distributions corresponding to each topic, i.e., p(wjµ). Therefore, words with the highest probability in the distribution would suggest the semantics represented by the topic.
+\end{definition}
 
-\item We use a influence maximization based model to model information coverage of terms. More specifically, we use a linear threshold model, where influence probability from $n_i^t$ to $n_j^t$ is defined as $$P_{i,j}^{t} = \alpha P_{i,j}^{t-1} + (1-\alpha)W(n_i^t, n_j^t)}$$, and the activate threshold of $n_i^t$ is $$\Theta_i^t = \beta \Theta_i^{t-1} + (1-\beta) e^{\sum wX}$$, where $X$ is a feature vector and $w$ is the weight. The problem is to choose a set of $k$ term that maximize the content coverage. 
+The document cluster denotes the information source and the query denotes the information need. A document cluster is a sub set of the entire document collection. All documents in the cluster are related to the query. Thus, we can define the task of query-oriented temporal summarization as:
 
-\end{itemize}
+\begin{definition}
+\textbf{(Query-based Temporal Summarization)}: Given a document collection $D$ and a query $q$ cluster $C$, the task of query-based temporal summarization is to identify the most representative terms and extract the evolutionary trend for the query, from the document cluster. Documents related to a query may talk about different perspectives of the query. For example, for the query "data mining", the topical aspects may include "classification", "clustering", and "association rule". Accordingly, we give definitions of the topic model and the query-oriented topic model of a document cluster.
+\end{definition}
 
-\textbf{Step.4 Trend partitioning}
-After choosing a set of summarization words, we further grouping the rest of the words into clusters, and finally we can use the clusters over time to indict evolving trend and generates the highly intuitive visualization.
+
+For the example of "data mining", suppose the query is about data mining application, we may only want to high-light topics related to applications of data mining algorithms
+and treat the other topics in the second place. Table 1 summarizes the notations.
+Based on these definitions, the major task of query-oriented summarization can be defined as follows: given a query and a document collection, the goal is to retrieve a
+document cluster related to the query and summarize the document cluster from different topical aspects of the query. It is challenging to perform the task defined above.
+First, existing topic models only consider the general topic distribution of multiple documents, but cannot capture the query information. It is challenging on how to incorporate the query information into the topic model and how to discriminate the different topics in the document cluster in a principled way. Second, it is unclear how to make use of the modeling results to calculate the score of each sentence and how to generate the final summarization result.

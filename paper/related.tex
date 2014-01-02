@@ -1,2 +1,21 @@
-\section{Related Works}
+\section{Related Work}
 \label{sec:related}
+
+The technologies similar to 1)-3) have extensively been ex-plored in the area oftopic detection and tracking(TDT) (see [1]).Actually 1) and 2) are closely related to the subprob-lems in TDT called topic tracking andnew event detection, respectively.Here topic tracking is to classify texts into one of topics specified by a user, while new event detection, for-merly calledfirst story detection, is to identify texts that discuss a topic that has not already been reported in earlier texts.The latter problem is also related to work on topic-conditioned novelty detection by Yang et.al.[16]. In most of related TDT works, however, topic tracking or new event detection is conducted without identifying main topics or a topic structure, hence the tasks 1)-3) cannot be unified within a conventional TDT framework.Further topic time-line analysis has not been addressed in it.
+
+Swan and Allen [12] addressed the issue of how to auto-matically overview timelines of a set of news stories. They used theχ $\chi^2$-method to identify at each time a burst of fea-ture terms that more frequently appear than at other times.
+
+Similar issues are addressed in the visualization community [3]. However, all of the methods proposed there are not designed to perform in an on-line fashion.
+
+Kleinberg [4] proposed a formal model of “bursts of activity” using an infinite-state automaton.This is closely related to topic emergence detection in our framework.A
+burst has a somewhat different meaning from a topic in the sense that the former is a series of texts including a specific feature, while the latter is a cluster of categorized
+texts.Hence topic structure identification and characterization cannot be dealt with in his model.Further note that Kleinberg’s model is not designed for real-time analysis but
+for retrospective one.
+
+Related to our statistical modeling of a topic structure, Liu et.al. [2] and Li and Yamanishi [6] also proposed meth-ods for topic analysis using a finite mixture model.Specifically, Liu et.al. considered the problem of selecting the optimal number of mixture components in the context of text clustering.In their approach a single model is selected as an optimal model under the assumption that the opti-mal model does not change over time. Meanwhile, in our approach, a sequence of optimal models is selected dynam-ically under the assumption that the optimal model may change over time.
+
+Related to topic emergence detection, Matsunaga and Yamanishi [7] proposed a basic method of dynamic model se-lection, by which one can dynamically track the change of number of components in the mixture model.However, any of all of these technologies cannot straightforwardly be ap-plied to real-time topic analysis in which the dimension of data may increase as time goes by.
+
+Related to topic structure identification, an on-line dis-counting learning algorithm for estimating parameters in a finite mixture model has been proposed by Yamanishi et. al.[14]. The main difference between our algorithm and theirs is that the former makes use of time-stamps in order to make the topic structure affected by a timeline of top-ics while the latter considers only the time-order of data ignoring their time-stamps.
+
+The rest of this paper is organized as follows: Section 2 describes a basic model of topic structure.Section 3 gives a method for topic structure identification.Section 4 gives a method for topic emergence detection.Section 5 gives a method for topic characterization.Section 6 gives experimental results. Section 7 gives concluding remarks.
