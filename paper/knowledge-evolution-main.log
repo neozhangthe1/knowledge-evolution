@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.22)  22 DEC 2013 12:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.22)  3 JAN 2014 14:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -415,29 +415,33 @@ File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 
 LaTeX Warning: No \author given.
 
-(./algorithm.tex
+(./approach.tex [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pd
+ftex.map}
+
+
+]) (./algorithm.tex
 Underfull \hbox (badness 4454) in paragraph at lines 19--20
 []\T1/aer/m/n/9 To over-come the dis-ad-van-tages above, we use a
  []
 
-<figures/mutual.png, id=1, 331.99031pt x 165.61874pt>
+<figures/mutual.png, id=20, 331.99031pt x 165.61874pt>
 File: figures/mutual.png Graphic file (type png)
- <use figures/mutual.png>
+
+<use figures/mutual.png>
 Package pdftex.def Info: figures/mutual.png used on input line 25.
 (pdftex.def)             Requested size: 192.00073pt x 95.78348pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
 Overfull \hbox (22.5pt too wide) detected at line 39
 []
  []
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2 <./figures/mutual.png>]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 98.
+
 
 LaTeX Warning: Reference `eq:sp_v' on page \thepage  undefined on input line 12
 6.
@@ -455,18 +459,16 @@ Underfull \hbox (badness 10000) detected at line 128
 [][]
  []
 
-) [2 <./figures/mutual.png>] [3
-
-] (./knowledge-evolution-main.aux)
+) [3] (./knowledge-evolution-main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3965 strings out of 493315
- 49282 string characters out of 6137903
- 137358 words of memory out of 5000000
- 7282 multiletter control sequences out of 15000+600000
+ 3969 strings out of 493315
+ 49330 string characters out of 6137903
+ 136366 words of memory out of 5000000
+ 7283 multiletter control sequences out of 15000+600000
  60582 words of font info for 97 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  41i,23n,28p,826b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -490,7 +492,7 @@ type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw
 /times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utm
 r8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on knowledge-evolution-main.pdf (3 pages, 230041 bytes).
+Output written on knowledge-evolution-main.pdf (3 pages, 243270 bytes).
 PDF statistics:
  98 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream

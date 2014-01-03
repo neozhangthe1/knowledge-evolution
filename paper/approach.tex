@@ -1,0 +1,42 @@
+\section{Domain Knowledge}
+\label{sec:approach}
+
+The standard topic modeling techiques decomposing the observed data into latent topics according to a purely data-driven objective function. This means that topic models inherit some of the disadvantages of unsupervised learning. For example, there may be multiple candidate partitions of the dataset which capture different aspects of the underlying structure.
+
+Purely unsuperivsed topic modeling discover topics which represent strong statistical patterns but do not always correspond to user expectations of semantically meaningful topics. 
+
+Supervised LDA[Blei and McAuliffe, 2008] can be applied to labeled documents, augmenting each document $d$ with a label variable $y_d$, which either categorical or continuous. Each $y_d$ value is modeled by a Generalized Linear Model in the vector of mean topic counts $\bar{Z} = \frac{1}{N_d}\sum_{N_d}^{n=1}z_n$ for the document. This approach can therefore make label prediction by calculating the posterior topic assignments for a test document to obtain a $\bar{z}$ value. This model tends to produce topics that are able to "explain" the label value $y$ for the training set. In this way the label information indirectly influences the topic decomposion discovered by the model.
+
+In dynamic topic models, the corpus is partitioned into disjoint time slices. Using logistic normal distributions, both the document-topic mixtures and topic-word multinomials evolve via multivariate Gaussian dynamics (i.e., at time step $s$ natural parameter $v_s$ is Gaussian distributed with mean $v_{s-1}$). Topics over time modeling timestamps as being genreated by the model itself. 
+
+In standard LDA, topic-word multinomial distributions $\Phi_z = p(w|z)$ are drawn from a Dirichlet prior with hyperparameter $\beta$. To some extent, domain knowledge can be encoded into this Dirichlet prior by setting the values in the $\beta$ hyperparameter vector. The standard Dirichlet prior can be replaced with a more expressive Dirichlet Forest Prior.
+
+The Dirichlet Tree distribution reparameterizes and generalized the standard Dirichlet distribution, while maintaining conjugacy to the multinomial. In the Dirichlet Tree, the leaf nodes correspond to the mulitnomial probabilities. The root node is assigned probability mass 1, which then "flows" to its children in proportion to a sample from Dirichlet distriution parametrized by the out-edge weights. Each internal node then distributes the probability mass it recives to its children in the same way.
+
+The Dirichlet forest prior encodes both "Must-Link" and "Cannot-Link". It yeilds a mixture model of Dirichlet subtree within each connected component, each corresponds to a maximal clique. For each topic, one subtree is selected according to probability $$P(r) = |M_{rq}|, q = 1...Q^{(r)}.$$
+Enssentially the selected subtree indexed by $q$ tends to redistribute nearly all probability mass to the words within $M_{rq}$. Since there is no mass left for other cliques, it is impossible for a word outside clique $M_{rq}$ to have a large probability. Therefore, no Cannot-Link will be violated.
+
+LogicLDA allows the user to express domain knowledge in First-Order Logic. 
+\begin{itemize}
+\item \textbf{Constants} are symbols that represent an actual object in the problem domain.
+\item \textbf{Variables} are symbols that can take on values from the set of constants.
+\item \textbf{Predicates} are symbols that express relations, and evaluate to \emph{true} or \emph{false} for different arguments.
+\item \textbf{Functions} are symbols that express mappings.
+\item \textbf{Terms} are any expressions that refer to objects in the domain.
+\item \textbf{Atoms} are predicates applied to terms.
+\item \textbf{Formulas} are constructed from atoms using logical connectives $(\wedge,\vee,\neg,\Rightarrow)$.
+\item \textbf{Clauses} are formulas consisting of a disjunction of literals.
+\item \textbf{Ground} terms, atoms, or formulas contain no variables.
+\end{itemize}
+
+Markov Logic Networks are a class of graphical models operate over this type of logical domain. A "possible world" consists of a set of binary assignments for all possible ground predicates. A MLN then assigns probabilities to all possible worlds. 
+
+\begin{itemize}
+\item $Z(i,t)$ is true if the hidden topic $z_i = t$, and false otherwise.
+\item $W(i,v)$ is true if word $w_i = v$, and false otherwise.
+\item $D(i,j)$ is true if $d_i = j$, and false otherwise.
+\end{itemize}
+
+The model probability of LogicLDA can be interpreted as the product of the individual MLN and LDA contributions. Another perspective is that LogicLDA consists of an MLN augmented with continuous varibles $(\Theta, \Phi)$ and associated potential functions.
+
+The goal of LogicLDA is to learn the most likely $\phi$ and $\theta$ in the model. As in standard LDA, the latent topic assignment $z$ cannot be marginalized out in practice due to their combinatorial nature. We instead aim to find the maximum a posteriori estimate of $z$, $\Theta$, $\Phi$ jointly. This can be formulated as maximizing the logarithm of the unnormalized probability.
